@@ -2,7 +2,7 @@
 
 Static marketing site (plain HTML/CSS/JS, no build step) for Logan Wiebe's residential concrete company in Gentry, AR. Local Service **type B** service website — built to rank for NWA concrete searches, then convert with calls and the estimate form.
 
-**Status: v1 built 2026-10-09, LOCAL ONLY. Not committed, not deployed. Kennedy reviews first.**
+**Status: v1 built 2026-10-09, revised through 2026-10-12. DEPLOYED 2026-10-20 to https://caliberconcrete.vercel.app as the client preview** (repo customleadz-sites/caliberconcrete, git repo lives inside `site/`, Vercel project `caliberconcrete` under team custom-leadz, GitHub-connected so a push to `main` auto-deploys). Still a staging URL: form key is a placeholder and stock photos remain.
 
 ## Pages (13)
 | File | URL | What |
