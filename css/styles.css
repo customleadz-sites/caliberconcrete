@@ -150,7 +150,8 @@ ul, ol { padding-left: 1.3em; }
 .hero .eyebrow { color: var(--steel-light); } .hero .eyebrow::before { background: var(--steel); }
 .eyebrow--both::after { content: ""; width: 34px; height: 2px; background: var(--steel); }
 .hero h1 { color: #fff; margin-bottom: .6rem; text-shadow: 0 2px 20px rgba(0,0,0,.35); }
-.hero h1 em { display: block; font-family: var(--font-body); font-style: normal; font-weight: 500; text-transform: uppercase; color: var(--steel-light); letter-spacing: .08em; font-size: .52em; line-height: 1.25; margin-top: .35em; }
+.hero h1 em { display: block; font-family: var(--font-body); font-style: normal; font-weight: 500; text-transform: uppercase; color: var(--steel-light); letter-spacing: .03em; font-size: .42em; line-height: 1.25; margin-top: .4em; white-space: nowrap; }
+@media (max-width: 560px) { .hero h1 em { white-space: normal; font-size: .46em; } }
 .hero h1 em .sep { font-style: normal; font-weight: 300; padding: 0 .15em; opacity: .7; }
 .hero .lead { color: var(--text-on-dark); max-width: 60ch; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.6rem; }
