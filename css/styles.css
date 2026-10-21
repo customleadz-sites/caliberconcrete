@@ -148,6 +148,7 @@ ul, ol { padding-left: 1.3em; }
   linear-gradient(90deg, rgba(8,35,64,.75) 0%, rgba(8,35,64,.2) 60%, rgba(8,35,64,0) 100%); }
 .hero__inner { padding: clamp(4rem, 9vw, 7rem) 0 clamp(3rem, 6vw, 5rem); max-width: 820px; }
 .hero .eyebrow { color: var(--steel-light); } .hero .eyebrow::before { background: var(--steel); }
+.eyebrow--both::after { content: ""; width: 34px; height: 2px; background: var(--steel); }
 .hero h1 { color: #fff; margin-bottom: .6rem; text-shadow: 0 2px 20px rgba(0,0,0,.35); }
 .hero h1 em { display: block; font-family: var(--font-body); font-style: normal; font-weight: 500; text-transform: uppercase; color: var(--steel-light); letter-spacing: .08em; font-size: .52em; line-height: 1.25; margin-top: .35em; }
 .hero h1 em .sep { font-style: normal; font-weight: 300; padding: 0 .15em; opacity: .7; }
