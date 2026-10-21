@@ -2,7 +2,7 @@
 
 Static marketing site (plain HTML/CSS/JS, no build step) for Logan Wiebe's residential concrete company in Gentry, AR. Local Service **type B** service website — built to rank for NWA concrete searches, then convert with calls and the estimate form.
 
-**Status: v1 built 2026-10-09, revised through 2026-10-12. DEPLOYED 2026-10-20 to https://caliberconcrete.vercel.app as the client preview** (repo customleadz-sites/caliberconcrete, git repo lives inside `site/`, Vercel project `caliberconcrete` under team custom-leadz, GitHub-connected so a push to `main` auto-deploys). Still a staging URL: form key is a placeholder and stock photos remain.
+**Status: live preview at https://caliberconcrete.vercel.app (deployed 2026-10-20). Round-2 revisions from Logan's 2026-10-20 call are BUILT LOCALLY (2026-10-21) and NOT pushed yet — Kennedy reviews at localhost first.** Repo customleadz-sites/caliberconcrete, git repo lives inside `site/`, Vercel project `caliberconcrete` under team custom-leadz, GitHub-connected so **a push to `main` auto-deploys** — don't push until Kennedy says go. Form key is still a placeholder.
 
 ## Pages (13)
 | File | URL | What |
@@ -27,12 +27,13 @@ Static marketing site (plain HTML/CSS/JS, no build step) for Logan Wiebe's resid
 - Chamfered corners on buttons/cards/images echo the big "C" in the logo. The bullet from the logo is the list marker in "Why Caliber".
 - Layout follows cmiconstruction.com (the reference he loved): dark-overlay photo hero, scroll-reveal sections, alternating photo-card/text service rows, dark band, photo grid, single testimonial, contact block. No text-over-photo sections mid-page (what he disliked on Milestone).
 
-## The logo is an inline SVG, not an image
-We could not get the original logo file — `../assets/logo/actual logo 3.jpg` is an embossed mockup and a pixel cutout came out ragged. The wordmark is rebuilt as inline SVG inside `.brand` and `.footer__logo` (text in Chakra Petch + a drawn bullet + boxed LLC). It recolors via CSS variables `--logo-primary` / `--logo-secondary`, which is how the footer gets the light version. If Logan ever sends a real PNG/SVG, swap the SVG for an `<img>` in the header/footer of every page.
+## The logo is an inline SVG traced from the mockup
+Master vector: `../assets/logo/vector/caliber-concrete-logo.svg` (+ 2400px navy and white PNGs). It was traced 2026-10-21 from `../assets/logo/actual logo 3.jpg` with `../assets/logo/vector/trace-from-mockup.py` (colour masks → potrace → every edge snapped to 0/45/90°, bullet drawn by hand from row measurements), then compared against the mockup over six rounds until the letterforms matched. The same paths are inlined in `.brand` and `.footer__logo` on every page (and in `tools/build-pages.py`), recolored via `--logo-primary` / `--logo-secondary`. The bullet from the logo is also the `.bullets` list marker on the home page, and the big C is the favicon (`images/favicon.svg`, `favicon.ico`, `apple-touch-icon.png` — white background, navy C). If Logan sends the designer's original vector, diff it against ours and swap if it's cleaner.
 
 ## Photos
 - **Real (his):** `images/work/` — one stamped patio job (3 angles) + one fresh slab, WebP with `-sm` variants. Originals in `../assets/photos/`.
-- **PLACEHOLDERS (Pexels, swap ASAP):** `images/stock/` — driveway, sidewalk, crew, power trowel, and the "owner" photo on About. Sources listed in `../assets/stock-placeholders/SOURCES.txt`. Every placeholder use is in `images/stock/`; grep `images/stock/` to find them all. The About photo is labelled "Placeholder" on the page itself — remove that note when the real photo goes in.
+- **Holdeman Concrete photos (approved):** `images/photos/` — 17 job photos from `clients/Holdeman Concrete/assets/photos/`, used with Holdeman's permission (Kennedy, 2026-10-21) as stand-ins until Logan has his own. Re-encoded to WebP with all EXIF/GPS stripped and renamed by subject. They appear on the home page service rows, services hub, the four service-page heroes and in-body photo pairs, service-area hero, and the About page (hero + the "owner" slot, which is a Holdeman finisher, not Logan — swap when Logan sends his photo). They are deliberately NOT on Completed Jobs, which stays Logan's own work only.
+- `images/stock/` (old Pexels placeholders) is no longer referenced by any page. Kept on disk so cached pages don't 404; delete after launch.
 
 ## Contact form — NOT CONNECTED YET
 `contact.html` posts to Web3Forms but the access key is the placeholder `YOUR_WEB3FORMS_ACCESS_KEY`. Until it's replaced the JS skips sending and just shows `/thank-you` so the flow can be reviewed. **To go live:** create a Web3Forms key for `caliberconcretellcnwa@gmail.com`, paste it into the hidden `access_key` input, submit the form once as a live test. Spam protection: honeypot `botcheck` field + US-phone validation + Web3Forms filtering (same setup as North Shade Lawn).
@@ -49,7 +50,7 @@ We could not get the original logo file — `../assets/logo/actual logo 3.jpg` i
 Licensed and insured (not bonded); owner on every job; free written estimates after a pre-qualification call; warranty option when the customer goes with the recommended prep; full cleanup; start usually within about a week.
 
 ## Domain / canonicals
-Everything (canonicals, og:url, sitemap, robots, JSON-LD) points at the **staging URL `https://caliberconcrete.vercel.app`** so nothing points at a domain that doesn't resolve. When Logan buys the domain (recommended: `caliberconcretenwa.com`, available as of 2026-10-08), find-and-replace `caliberconcrete.vercel.app` → the real domain across all `.html`, `sitemap.xml` and `robots.txt`.
+**caliberconcretenwa.com** — bought by Kennedy 2026-10-20 at Squarespace Domains. Added to the Vercel project (apex + www) 2026-10-21. Canonicals, og:url, sitemap, robots and JSON-LD all point at `https://caliberconcretenwa.com`. **DNS still to do at Squarespace:** `A @ 76.76.21.21` and `CNAME www cname.vercel-dns.com`; Vercel issues the SSL cert automatically once it sees the record. Until DNS is set the site is only reachable at caliberconcrete.vercel.app.
 
 ## Preview locally
 Double-click **`Preview Site.command`** (gitignored). It uses port 8765 and automatically moves to the next free port if another site's preview is already running — read the port in the terminal window it opens.
@@ -62,10 +63,16 @@ Cache-busting: `css/styles.css?v=N` and `js/site.js?v=N` — bump N in every pag
 ## Deploy (when Kennedy says go)
 Read the **git-deploy** skill first. Repo under **customleadz-sites**, Vercel project `caliberconcrete` → `caliberconcrete.vercel.app` (no hyphens). Zero config; `vercel.json` has cleanUrls + cache headers. Stage specific files — never `git add -A` from the client folder.
 
+## Decisions from Logan's review call (2026-10-20, transcript in `../recordings/`)
+Reviews section removed from home until he has 3–4 real reviews · sticky right column removed from the four service pages (full-width article + photo pairs instead) · "35 miles" paragraph removed from service area · map is a polygon that stops at the Oklahoma line, not a circle (Logan avoids Oklahoma jobs) · contact form lost the "Finish" dropdown and the "What happens next" box (type of job, rough size and timeframe stay) · favicon = white with navy C · hero services line uses vertical bars, italics kept · "Shop Slabs" stays in the hero line on purpose (rank for it before offering it).
+
 ## Before launch checklist
+- [ ] Kennedy reviews round-2 locally → push to main (auto-deploys)
+- [ ] DNS at Squarespace (A + CNAME above) → check https://caliberconcretenwa.com
 - [ ] Real Web3Forms key + one live test submission
-- [ ] Swap placeholder photos in `images/stock/` (at least the About photo)
+- [ ] Logan's own photos: About (owner), then replace Holdeman stand-ins over time
+- [ ] Logan's designer logo files (Fiverr) if they turn up — compare with our trace
 - [ ] Facebook page URL + Google Business Profile URL into footer/contact/JSON-LD
-- [ ] Domain bought → replace staging URL everywhere
+- [ ] Business email: Logan may move to logan@caliberconcretenwa.com — update contact/footer/JSON-LD when he does
 - [ ] Run `Website Structure/seo-launch-audit.md` (target 85+), save scorecard in the client folder
 - [ ] GA4 property + tag if Kennedy wants analytics

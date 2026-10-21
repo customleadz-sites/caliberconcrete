@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /thank-you
 
-Sitemap: https://caliberconcrete.vercel.app/sitemap.xml
+Sitemap: https://caliberconcretenwa.com/sitemap.xml

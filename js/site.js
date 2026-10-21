@@ -181,11 +181,15 @@
       }).addTo(map).bindPopup(home ? t[0] + " — Home base" : t[0]);
       bounds.push([t[1], t[2]]);
     });
-    // Service radius: Gentry → Springdale (edge of the circle passes through Springdale)
-    var home = L.latLng(36.2676, -94.4844), radius = 33141;
-    // Set the view FIRST (a circle's bounds can't be read until the map has a center/zoom)
-    // Fit the whole circle with a little breathing room top and bottom (the box is wider than it is tall, so height is the limit)
-    map.fitBounds(home.toBounds(radius * 2), { padding: [18, 18] });
-    L.circle(home, { radius: radius, color: "#BDBCBC", weight: 2, dashArray: "8 8", fillColor: "#1E4A7A", fillOpacity: .22 }).addTo(map);
+    // Service area: a shape instead of a circle. West edge runs along the Oklahoma state line;
+    // east edge reaches past Bentonville, Rogers, Springdale and Fayetteville.
+    var area = [
+      [36.50, -94.618], [36.50, -94.30], [36.46, -94.08], [36.36, -93.98], [36.22, -93.98],
+      [36.04, -94.02], [35.95, -94.14], [35.92, -94.34], [35.96, -94.56], [36.02, -94.618]
+    ];
+    var poly = L.polygon(area, { color: "#BDBCBC", weight: 2, dashArray: "8 8", fillColor: "#1E4A7A", fillOpacity: .22 });
+    // Set the view FIRST (fit the shape with a little breathing room), then draw it
+    map.fitBounds(L.latLngBounds(area), { padding: [16, 16] });
+    poly.addTo(map);
   }
 })();
