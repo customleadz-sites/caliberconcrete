@@ -2,7 +2,7 @@
 
 Static marketing site (plain HTML/CSS/JS, no build step) for Logan Wiebe's residential concrete company in Gentry, AR. Local Service **type B** service website — built to rank for NWA concrete searches, then convert with calls and the estimate form.
 
-**Status: DOMAIN LIVE at https://caliberconcretenwa.com but still serving the 2026-10-20 build. Everything since (round-2 + service-page template + Kennedy's 2026-10-28 photo/mobile pass + launch fixes) is BUILT LOCALLY and NOT pushed — push when Kennedy says go.** Repo customleadz-sites/caliberconcrete, git repo lives inside `site/`, Vercel project `caliberconcrete` under team custom-leadz, GitHub-connected so **a push to `main` auto-deploys** — don't push until Kennedy says go. Form key is still a placeholder.
+**Status: LIVE at https://caliberconcretenwa.com (launch build pushed 2026-10-29). Search Console verified (HTML tag on the home page — don't remove it) and sitemap submitted; Facebook sharing image refreshed; PageSpeed mobile: home 99 / driveways 96, accessibility 98–99, best practices 100, SEO 100. Fonts are SELF-HOSTED in `fonts/` (woff2, @font-face at the top of styles.css) — no Google Fonts links. Form key still a placeholder (next task).** Repo customleadz-sites/caliberconcrete, git repo lives inside `site/`, Vercel project `caliberconcrete` under team custom-leadz, GitHub-connected so **a push to `main` auto-deploys** — don't push until Kennedy says go. Form key is still a placeholder.
 
 ## Pages (13)
 | File | URL | What |
@@ -61,7 +61,7 @@ Double-click **`Preview Site.command`** (gitignored). It uses port 8765 and auto
 ## Editing
 Pages are plain HTML — edit them directly. They were first generated from `../tools/build-pages.py` (shared header/footer/NAP in one place); re-running that script **overwrites every page**, so only use it if you're changing the shared chrome everywhere and haven't hand-edited pages since.
 
-Cache-busting: `css/styles.css?v=N` and `js/site.js?v=N` — bump N in every page when those files change.
+Images: each photo has `-xs` (480w), `-sm` (800w) and full sizes; keep all three when adding photos. Cache-busting: `css/styles.css?v=N` and `js/site.js?v=N` — bump N in every page when those files change.
 
 ## Deploy (when Kennedy says go)
 Read the **git-deploy** skill first. Repo under **customleadz-sites**, Vercel project `caliberconcrete` → `caliberconcrete.vercel.app` (no hyphens). Zero config; `vercel.json` has cleanUrls + cache headers. Stage specific files — never `git add -A` from the client folder.
@@ -71,11 +71,11 @@ Reviews section removed from home until he has 3–4 real reviews · sticky righ
 
 ## Before launch checklist (updated 2026-10-29)
 Done locally, waiting on push: titles 48–59 chars and descriptions 142–158 chars on every page · sitemap dated 2026-10-29 (11 URLs, thank-you + 404 excluded and noindexed) · robots.txt allows all, blocks /thank-you, points at the sitemap · canonicals/og:url/schema all on the live domain · every image has alt text and a descriptive filename, heroes ≤450 KB, everything below the fold lazy-loads · phone identical on every page as a tel: link · schema = HomeAndConstructionBusiness (priceRange removed) + Service + FAQPage · custom 404 live · www → apex 308 redirect set on Vercel · DNS live (A + CNAME at Squarespace, no name-server change needed).
-- [ ] **Push to main** (auto-deploys; the domain currently shows the 2026-10-20 build)
+- [x] Pushed to main 2026-10-29 — live
 - [ ] **Web3Forms access key** — create at web3forms.com with caliberconcretellcnwa@gmail.com (Logan must click the confirmation email), paste into the hidden `access_key` input on contact.html AND the four service pages, then submit one real test. CRITICAL — the form sends nothing until this is done.
-- [ ] After push: PageSpeed Insights mobile run on / and /driveways (target 90+), fix anything it flags
-- [ ] After push: Facebook Sharing Debugger on the home URL to refresh the sharing image
-- [ ] Google Search Console: add the domain property (DNS TXT at Squarespace), submit sitemap.xml
+- [x] PageSpeed mobile: home 99, driveways 96 (2026-10-29) after self-hosting fonts, 480px phone image variants, hero preload
+- [x] Facebook Sharing Debugger scraped 2026-10-29 — shows the card image
+- [x] Search Console: URL-prefix property https://caliberconcretenwa.com/ verified via HTML tag 2026-10-29, sitemap.xml submitted (status updates within a day or two)
 - [ ] Google Business Profile: create/verify, then add its URL + Facebook URL to footer/contact + schema `sameAs`
 - [ ] Logan's own photos: About (owner), then replace stand-ins over time; his designer logo files if they turn up
 - [ ] Business email: if Logan moves to logan@caliberconcretenwa.com, update contact/footer/schema
