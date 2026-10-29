@@ -5,10 +5,27 @@
   /* ---- Mobile nav ---- */
   var toggle = document.querySelector(".nav-toggle");
   if (toggle) {
-    toggle.addEventListener("click", function () {
-      var open = document.body.classList.toggle("nav-open");
+    var backdrop = document.createElement("div");
+    backdrop.className = "nav-backdrop";
+    (toggle.closest(".header") || document.body).appendChild(backdrop); // inside the header so it stacks under the menu
+    var scrollY = 0;
+    function setNav(open) {
+      if (open === document.body.classList.contains("nav-open")) return;
+      if (open) {
+        // Lock the page behind the menu (iOS ignores overflow:hidden on body, so pin it in place)
+        scrollY = window.scrollY || window.pageYOffset;
+        document.body.style.top = -scrollY + "px";
+        document.body.classList.add("nav-open");
+      } else {
+        document.body.classList.remove("nav-open");
+        document.body.style.top = "";
+        window.scrollTo({ top: scrollY, behavior: "instant" });
+      }
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
+    }
+    toggle.addEventListener("click", function () { setNav(!document.body.classList.contains("nav-open")); });
+    backdrop.addEventListener("click", function () { setNav(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setNav(false); });
     document.querySelectorAll(".nav a").forEach(function (a) {
       a.addEventListener("click", function (e) {
         var sub = a.parentElement;
@@ -183,9 +200,12 @@
     });
     // Service area: a shape instead of a circle. West edge runs along the Oklahoma state line;
     // east edge reaches past Bentonville, Rogers, Springdale and Fayetteville.
+    // West edge = the actual AR/OK state line (Census boundary points, Missouri corner down to Lincoln).
     var area = [
-      [36.50, -94.618], [36.50, -94.30], [36.46, -94.08], [36.36, -93.98], [36.22, -93.98],
-      [36.04, -94.02], [35.95, -94.14], [35.92, -94.34], [35.96, -94.56], [36.02, -94.618]
+      [36.4994, -94.6179], [36.4994, -94.30], [36.46, -94.08], [36.36, -93.98], [36.22, -93.98],
+      [36.04, -94.02], [35.95, -94.14], [35.92, -94.34],
+      [35.9342, -94.5227], [36.0078, -94.5357], [36.0783, -94.5479], [36.1521, -94.5612],
+      [36.2501, -94.5779], [36.3457, -94.5934], [36.4219, -94.6054]
     ];
     var poly = L.polygon(area, { color: "#BDBCBC", weight: 2, dashArray: "8 8", fillColor: "#1E4A7A", fillOpacity: .22 });
     // Set the view FIRST (fit the shape with a little breathing room), then draw it
