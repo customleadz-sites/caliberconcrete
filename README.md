@@ -39,7 +39,7 @@ Master vector: `../assets/logo/vector/caliber-concrete-logo.svg` (+ 2400px navy 
 - `images/stock/` (old Pexels placeholders) is no longer referenced by any page. Kept on disk so cached pages don't 404; delete after launch.
 
 ## Contact form — NOT CONNECTED YET
-`contact.html` posts to Web3Forms but the access key is the placeholder `YOUR_WEB3FORMS_ACCESS_KEY`. Until it's replaced the JS skips sending and just shows `/thank-you` so the flow can be reviewed. **To go live:** create a Web3Forms key for `caliberconcretellcnwa@gmail.com`, paste it into the hidden `access_key` input, submit the form once as a live test. Spam protection: honeypot `botcheck` field + US-phone validation + Web3Forms filtering (same setup as North Shade Lawn).
+`contact.html` posts to Web3Forms but the access key is the placeholder `YOUR_WEB3FORMS_ACCESS_KEY`. Until it's replaced the JS skips sending and just shows `/thank-you` so the flow can be reviewed. **To go live:** create a Web3Forms key for `loganwiebe@caliberconcretenwa.com`, paste it into the hidden `access_key` input, submit the form once as a live test. Spam protection: honeypot `botcheck` field + US-phone validation + Web3Forms filtering (same setup as North Shade Lawn).
 
 ## Deliberately NOT on the site (Kennedy / Logan decisions)
 - **No cost or pricing sections anywhere** (Kennedy, 2026-10-09).
@@ -72,12 +72,12 @@ Reviews section removed from home until he has 3–4 real reviews · sticky righ
 ## Before launch checklist (updated 2026-10-29)
 Done locally, waiting on push: titles 48–59 chars and descriptions 142–158 chars on every page · sitemap dated 2026-10-29 (11 URLs, thank-you + 404 excluded and noindexed) · robots.txt allows all, blocks /thank-you, points at the sitemap · canonicals/og:url/schema all on the live domain · every image has alt text and a descriptive filename, heroes ≤450 KB, everything below the fold lazy-loads · phone identical on every page as a tel: link · schema = HomeAndConstructionBusiness (priceRange removed) + Service + FAQPage · custom 404 live · www → apex 308 redirect set on Vercel · DNS live (A + CNAME at Squarespace, no name-server change needed).
 - [x] Pushed to main 2026-10-29 — live
-- [ ] **Web3Forms access key** — create at web3forms.com with caliberconcretellcnwa@gmail.com (Logan must click the confirmation email), paste into the hidden `access_key` input on contact.html AND the four service pages, then submit one real test. CRITICAL — the form sends nothing until this is done.
+- [ ] **Web3Forms access key** — create at web3forms.com with loganwiebe@caliberconcretenwa.com (Logan must click the confirmation email), paste into the hidden `access_key` input on contact.html AND the four service pages, then submit one real test. CRITICAL — the form sends nothing until this is done.
 - [x] PageSpeed mobile: home 99, driveways 96 (2026-10-29) after self-hosting fonts, 480px phone image variants, hero preload
 - [x] Facebook Sharing Debugger scraped 2026-10-29 — shows the card image
 - [x] Search Console: URL-prefix property https://caliberconcretenwa.com/ verified via HTML tag 2026-10-29, sitemap.xml submitted (status updates within a day or two)
 - [ ] Google Business Profile: create/verify, then add its URL + Facebook URL to footer/contact + schema `sameAs`
 - [ ] Logan's own photos: About (owner), then replace stand-ins over time; his designer logo files if they turn up
-- [ ] Business email: if Logan moves to logan@caliberconcretenwa.com, update contact/footer/schema
+- [x] Business email switched to loganwiebe@caliberconcretenwa.com everywhere (2026-10-29)
 - [ ] Delete `images/stock/` once the new build has been live a few weeks (old cached pages no longer reference it)
 - [ ] GA4 property + tag if Kennedy wants analytics (none installed)
